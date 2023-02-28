@@ -70,10 +70,41 @@ def get_rand_subset_bvals(b_values, n):
     rand_selected_bval_indice = get_rand_selected_bval_indice(b_values, n)
     return b_values[rand_selected_bval_indice]
 
-if __name__ == "__main__":
-    bvals_all_100206 = np.loadtxt(config.data_folder2 + '/100206/bvals')
-    rand_selected_bval_indice = get_rand_selected_bval_indice(bvals_all_100206, 9)
-    print()
+def get_mask_pro(scan, mask):
+    scan_dimension = scan.shape
+    x = scan_dimension[0]
+    y = scan_dimension[1]
+    z = scan_dimension[2]
+    b = scan_dimension[3]
+
+    scan_long = np.reshape(scan, (x*y*z, b))
+    mask_long = np.reshape(mask, (x*y*z, 1))
+
+    indice_beginning_0_all = np.where(scan_long[:, 0] == 0)[0]
+
+    mask_long_pro = np.copy(mask_long)
+    mask_long_pro[indice_beginning_0_all] = 0
+
+    return mask_long_pro
+
+
+def add_bg(mask_long, params):
+    resume_params = np.copy(mask_long)
+    no_bg_indices = np.where(mask_long == 1)[0]
+    for i, index in enumerate(no_bg_indices):
+        resume_params[index] = params[i]
+    return resume_params
+
+def back_to_3D(mask_long, parames_1d, shape):
+    params_with_bg = add_bg(mask_long, parames_1d.detach().numpy())
+    params_3d = np.reshape(params_with_bg, shape)
+    return params_3d
+
+
+# if __name__ == "__main__":
+#     bvals_all_100206 = np.loadtxt(config.data_folder2 + '/100206/bvals')
+#     rand_selected_bval_indice = get_rand_selected_bval_indice(bvals_all_100206, 9)
+#     print()
 
 
 
