@@ -1,0 +1,9 @@
+torch == 1.12.1
+nibabel == 4.0.2
+numpy == 1.23.5
+scikit-image == 0.19.3 
+scikit-learn == 1.2.2 
+matplotlib == 3.6.2 
+dmipy == 1.0.3 
+jupyter == 1.0.0
+jupyterlab == 3.5.1 
