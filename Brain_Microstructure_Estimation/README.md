@@ -16,11 +16,13 @@ conda install --file requirements.txt
 
 To use the normalized and processed HCP data directly for model training, download the files [here](https://drive.google.com/drive/folders/1wzgFoZyexkBL40GtGDcNit-WRiHJA96I?usp=sharing).
 Alternatively, you can normalize and process the data yourself by running the following command:
+```bash
 python norm_data.py --dmri_path path1 --mask_path path2 --bval_path path3
 where:
 path1: path to a data.nii.gz file in the Original HCP folder
 path2: path to a nodif_brain_mask.nii.gz file in the Original HCP folder
 path3: path to a bvals file in the Original HCP folder
+```
 
 ## Training
 To train the self-supervised ANN for ball-and-stick model fitting, run the following command in the terminal:
