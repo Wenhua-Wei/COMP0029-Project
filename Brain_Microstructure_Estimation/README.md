@@ -26,11 +26,13 @@ path3: path to a bvals file in the Original HCP folder
 
 ## Training
 To train the self-supervised ANN for ball-and-stick model fitting, run the following command in the terminal:
+```bash
 python main.py --trainset_path trainset_dir_path --valset_path valset_dir_path --m_per_shell num
 where:
 trainset_dir_path: path to the normalized training data folder
 valset_dir_path: path to the normalized validation data folder
 num: number of measurements **in each shell** the user would like to choose (e.g., set num=90 for full measurements, num=45 for half measurements)
+```
 
 ## Evaluation
 A few pre-trained ANN models are stored in the COMP0029_CLBF0/saved_ANN directory. To apply a trained ANN model on unseen data and evaluate its performance, refer to the evaluation.ipynb notebook. 
